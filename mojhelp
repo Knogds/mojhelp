@@ -1,0 +1,381 @@
+#!/bin/bash 
+E="echo -e"
+EDIT="vim"
+
+case $1 in
+
+    alsa)
+        $E "\nPostoje moduli, pogledaj:"
+        $E "\nhttps://www.alsa-project.org/alsa-doc/alsa-lib/pcm_plugins.html"
+        $E "\nPostojeci hardware pogledaj na /proc/asound/cards"
+        $E "\nuglavnom koristi hw:0 ili hw:0,0 ili hw:1,0 ili"
+        $E "\njos bolje hw:imekartice (sa /proc/asound/cards)"
+        $E "\nAko trebas resampling, probaj plughw. \n"
+    ;;
+
+    android)
+        $E "\nDio ekrana ne radi? smanji radnu povrsinu:\n"
+        $E "adb shell\nwm overscan 0,650,0,0"
+        $E "wm density 300"
+        $E "\nIzlistaj sve pakete, izbrisi cache:\n"
+        $E "pm list packages -f"
+        $E "pm install ime_paketa"
+        $E "pm clear com.imepaketa.bla"
+    ;;
+
+    apt-get)
+        $E "\nHmmmm - ovo izgleda da ne radi."
+        $E "\nAko se root nalazi na drugom mount pointu."
+        $E "\napt-get -o Dir=/mnt/ update\n"
+    ;;
+
+    baresip)
+        $E "\nkonfiguracija u: ~/.baresip/*\n"
+        $E "  klikni enter u programu za help\n"
+    ;;
+
+    basename)
+        $E "basename -s .JPG IMEFAJLA.JPG == IMEFAJLA"
+    ;;
+
+    convert)
+        $E "za exif rotiranje -auto-orient"
+        $E "basename -s .JPG IMEFAJLA.JPG == IMEFAJLA"
+        $E "for i in * ; do convert $i -strip -auto-orient -quality 60
+        \`basename \$i JPG\`jpg ; done"
+    ;;
+
+    cmake)
+        $E "umjesto ./configure --prefix=/blabla"
+        $E "make DESTDIR=/blabla install"
+    ;;
+
+    dd)
+        $E "dd iflag=skip_bytes skip=1 #skip*bytes, inace je skip*bs"
+        $E "dd status=none surpresses everything but error messages"
+    ;;
+
+    ddd)
+        $E "pogreska... break: waiting until gdb gets ready"
+        $E "otvori ~/.ddd/init"
+        $E "promijeni: set extended-prompt not set \\n\\"
+        $E "s..."
+        $E "           set extended-prompt (gdb) \\n\\"
+        $E "ili komentiraj cijeli red s: ! ext... not set ..."
+    ;;
+
+    edit)
+        $EDIT $0
+    ;;
+
+    ffmpeg)
+        $E "mkv dopusta mijesanje svega"
+        $E "ffmpeg -i audio.mp3 -i video.mp4 -c copy output.mkv"
+        $E "ekran:"
+        $E "ffmpeg -video_size 1024x768 -framerate 25 -f x11grab -i :0.0+100,200 output.mp4"
+        $E "Odvajanje zvuka od videa:"
+        $E "ffprobe fajl (pogledaj output)"
+        $E "ffmpeg -i fajl.mp4 -codec:a copy -map 0:1 falj.mpa"
+        $E "-pix_fmts: monow monob gray rgb4 etc ..."
+        $E "RAW: ffmpeg -f rawvideo -video_size 3200x1800 -pixel_format monob -framerate 30 -i intput output.mkv"
+        $E "ffmpeg -f rawvideo -video_size 640x480 -pixel_format monow -framerate 30 -i ../../ewf1_disk_iz_E01_filea_orig -vcodec huffyuv rawvideo_cijela_particija.avi"
+    ;;
+
+    font|fonts)
+        $E "\nLokalni fontovi u ~/.local/share/fonts"
+        $E "\nupisi pa prouci:\nfc-cache -v\n"
+        $E "vim \$XDG_CONFIG_HOME/fontconfig/fonts.conf"
+        $E "lxappearance ignorira lokalni fonts.conf"
+        $E "citaj:https://wiki.archlinux.org/index.php/Font_configuration"
+    ;;
+
+    git)
+        $E "ssh clone:"
+        $E "git clone git@git.chalmers.se:caber/haskell_debugger"
+        $E "brisanje:"
+        $E "     rm blabla"
+        $E "     git add -u"
+        $E "     git commit -m \"maknuo DIR\""
+        $E "     git push origin master"
+        $E "     kao collaborator:git clone git@github.com:Krepop/dijeljeno"
+        $E "     kao owner:git clone git@github.com:Krepop/dijeljeno"
+        $E " ili kao owner:git clone ssh://git@github.com/Krepop/dijeljeno"
+        $E "Spor ssh na github? - AddressFamily inet u /etc/ssh/ssh_config"
+        $E "                    - za iskljucivo IPv4"
+        $E "branch:"
+        $E "kopiraj folder iz mastera u branch:"
+        $E "    git checkout ime_brancha"
+        $E "    git checkout master -- ime_mape"
+        $E "    git add ime_mape"
+        $E "    git commit -m \"dodao ime_mape iz master branch."
+        $E "branch update fork s glavne stranice ili kako se to vec zove:"
+        $E "1. (ako ne postoji) ... napravi branch npr. glavna_stranica-main"
+        $E "2. checkout u novi branch"
+        $E "git pull https://github.com/blablabla"
+        $E "3. promijeni fileove - add - commit - push"
+        $E "4. napravi pull request"
+        $E "remove branch:"
+        $E "git checkout ime_nekog_drugog_brancha"
+        $E "... napisi jos"
+        $E "k o r i s n o:"
+        $E "    git status uvijek nakon git add xyz"
+        $E "    obrnuto od git add . :"
+        $E "        PREMA GITU: git rm --cached . -r (-r kao rekurs.)"
+        $E "        ILI UOBICAJENO: git reset ."
+        $E "  ispis file-a:"
+        $E "  git show branchame:folder/file.name"
+    ;;
+
+    ghdl)
+        $E "kod kompajliranja ubaci LANG=en ./configure --prefix=/blabla"
+    ;;
+
+
+    gtk)
+        $E "GTK_DEBUG=interactive"
+    ;;
+
+    hexdump)
+        $E "hexdump -v -e '/1 \"%02X\"'"
+    ;;
+
+    iw)
+        $E "\niw dev wlan0 scan\n"
+    ;;
+
+    ikone|xfce4-panel|desktop)
+        $E "Lokalni direktorij s ikonama se nalazi u:\n\
+        ~/.local/share/applications"
+    ;;
+
+    java|openjdk) $E "Odi na https://jdk.java.net skini Ready for use verziju"
+	            $E "raspakiraj u lokalni bin direktorij"
+	            $E "dodaj raspakirani_direktorij/bin u PATH"
+    ;;
+
+    mobil|mobitel)
+        $E "\n Prvo na mobitelu odaberi nacin spajanja. povuci dolje statusnu liniju"
+        $E " Izaberi - Överföra filer."
+        $E " mobitel koristi MTP, Media Transfer Protocol"
+        $E " moze se instalirati jmtpfs pa mountati npr.:\n"
+        $E "     jmtpfs /tmp/mnt \n"
+        $E " i odmontirati npr.:\n"
+        $E "     fusermount -u /tmp/mnt\n"
+    ;;
+
+    mount-loop|mount)
+        $E "\n# fdisk -l rawfile.img"
+        $E "Gledaj Sektorstorlek + partition Början"
+        $E 'mount -o loop,offset=$((sektorstorlek*början)) rawimg.img /mnt\n'
+    ;;
+
+    mpv)
+        $E "mpv --audio-file"
+    ;;
+
+    mozilla|thunderbird|firefox)
+        $E 'Za fontove u izborniku, kreiraj folder chrome u profil'
+        $E 'https://www-archive.mozilla.org/unix/customizing.html'
+        $E 'za brzi rendering: gfx.xrender.enable true'
+    ;;
+
+    mupen64plus)
+        $E "fullscreen: alt+enter"
+    ;;
+
+    openssl | encrypt)
+        $E "cat Ivans_saga.txt | openssl enc -aes-256-cbc -e -iter 5000000 > Ivans_saga.txt.enc"
+        $E "cat Ivans_saga.txt.enc | openssl enc -aes-256-cbc -d -iter 5000000 > Ivans_saga.txt"
+    ;;
+
+    pulseaudio | pulse)
+        $E 'pacmd help'
+        $E 'pacmd list-sinks'
+        $E 'ili samo: pacmd'
+        $E 'pactl'
+        $E 'man default.pa'
+        $E 'za loopback mikrofon: pactl load-module module-loopback'
+    ;;
+    
+    pdf)
+        $E "koristi gs jer interno ga koriste convert ili ps2pdf"
+        $E "https://www.ghostscript.com/doc/current/Use.htm"
+        $E "Za smanjivanje jpg u pdf. Postoje druge postavke za smanjivanje"
+        $E "slika: /screen /ebook /printer /prepress."
+        $E 'gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -sOutputFile=output.pdf input.pdf'
+        $E "detektiraj slike duplikate i napravi linkove:"
+        $E "gs -sDEVICE=pdfwrite -dDetectDuplicateImages=true -o out2.pdf F5.pdf"
+        $E "smanji za ekran (vrlo vjerojatno ovo trebas):"
+        $E "gs -sDEVICE=pdfwrite -dPDFSETTINGS=/screen -r100 -o out2.pdf F5.pdf"
+
+    ;;
+
+    postgresql)
+        $E "napravi: createdb -U postgres -h localhost IME_DB"
+        $E "izbrisi: dropdb -U postgres -h localhost IME_DB"
+        $E "spoji se: psql -U postgres -h localhost IME_DB"
+    ;;
+
+    printer | cups | print)
+        $E "(kao root):"
+        $E "system-config-printer"
+        $E "cancel | Cancels a print request"
+        $E "cuspaccept | Enables queueing of print requests to the named destinations"
+        $E "cuspdisable | Disables the named printers or classes"
+        $E "cupsenable | Enables the named printers or classes"
+        $E "cupsreject | Rejects queueing of print requests to the named destinations"
+        $E "lp | Submits a print request"
+        $E "   | za printanje : lp textfile"
+        $E "lpadmin | Sets up or changes a printer or class configuration"
+        $E "        | /usr/sbin/lpadmin -p printer-name -E -v device -m ppd"
+        $E "lpc | Provides limited control over CUPS print and class queues"
+        $E "lpinfo | Shows available devices or drivers known to the CUPS server"
+        $E "lpmove | Moves a specified job or all jobs to a new destination"
+        $E "lpoptions | Displays or sets printer options and defaults"
+        $E "lpq | Shows the current print queue status"
+        $E "lpr | Submits a print request"
+        $E "lprm | Cancels print jobs that have been queued for printing"
+        $E "lpstat | Displays the status information for queues and requests"
+    ;;
+
+    ps)
+        $E "ps --width 35 -eo pcpu,comm --sort -pcpu"
+        $E "- je za obrnuti sort"
+    ;;
+
+    python|setup.py)
+        $E "python3 ./setup.py install --prefix=~/.local"
+    ;;
+
+    qemu|qemu-img)
+        $E "DIJELJENJE DATOTEKA: npr preko ssh"
+        $E "-device e1000,netdev=net0 -netdev user,id=net0,hostfwd=tcp::5555-:22"
+        $E "    na hostu: ssh -p5555 user@localhost"
+        $E "VIDEO vece rezolucije: sporo.. -vga virtio"
+        $E " (windows - niska rezolucija)  -vga cirrus (brze)"
+        $E "  najbolje, vece rezolucije... -vga qxl (brze)"
+        $E "and probing guessed raw... -drive file=xyz.dd,format=raw"
+        $E "device_add usb-host,vendorid=0x18a5,productid=0x0302"
+        $E "info usb"
+        $E "!!! BITNO - za usb podrsku dodaj machine... -M q35"
+        $E "https://www.qemu.org/docs/master/system/usb.html"
+        $E "komprimiran img:"
+        $E "qemu-img create -f qcow2 debian.qcow2 16G"
+        $E "snapshot.img je ovisan o disk.qcow2 i 
+            ako se obrise, snapshot.img vise nece raditi."
+        $E "qemu-img create -f qcow2 -b disk.qcow2 snapshot.img"
+        $E "orig.raw se ne modifira prilikom uporabe ovako:"
+        $E "qemu... -hda debian.raw -snapshot"
+
+    ;;
+
+    ratpoison)
+        $E "rpws dump ~/tmp/dump"
+        $E "rpws restore ~/tmp/dump"
+    ;;
+
+    rename)
+        $E "paket se zove renameutils, citaj:"
+        $E "/usr/share/doc/renameutils/README.gz"
+    ;;
+
+    rsync)
+        $E "rsync -avz -e 'ssh -p38015' ~/fax/datastrukturer_DIT961/lab4 \$MINIDELL:~/fax/datastrukturer_DIT961/lab4"
+    ;;
+
+    squashfs)
+        $E "https://elinux.org/Squash_FS_Howto"
+    ;;
+
+    strace)
+        $E "probaj isto /usr/bin/sotruss"
+    ;;
+
+    syslinux|extlinux)
+        $E "za Libretto:"
+        $E "download: https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.07.tar.xz"
+        $E "raspakiraj i pronadi mbr.bin"
+        $E "instaliraj mbr: dd if=mbr.bin bs=440 count=1 of=/dev/mmcblk0"
+        $E "mountaj boot disk na npr. /mnt"
+        $E "instaliraj syslinux-4.07/extlinux/extlinux --install /mnt"
+        $E "kopiraj menu.c32 i to kaj treba na boot disk"
+    ;;
+
+
+    udevadm)
+        $E "udevadm test /sys/class/net/enp0s26u1u2"
+    ;;
+
+    vim)
+        $E "debug/profiling vim -V12log  pa startaj i nakon toga prouci ./log"
+        $E "    probaj isto procitati :help --startuptime"
+        $E "Folding: zz zc zR"
+        $E "posebni znakovi:"
+        $E " :dig za pregled tablice sa znakovima"
+        $E " u insert modu ctrl-k nakon toga dva karaktera npr oo=• Co=©"
+        $E "packages:"
+        $E "     :help packages"
+        $E "wrap:"
+        $E "     obiljezi tekst, pritisni gq"
+        $E "     jedan red: gqq"
+        $E "     ili :set textwidth=50   ... obiljezi tekst, pritisni gq"
+        $E ":spremi foldove:"
+        $E "     :mkview  ...  a ucitaj ih s  ...  :loadview"
+        $E "     :mksession IME  återskapa: vim -S IME"
+        $E "tags:"
+        $E "     vim trazi tags fileove u set tags=dir1,dir2,dir3..."
+        $E "     gf  ...  go file - idi u file ispod kursora ctrl-o natrag"
+    ;;
+
+    vncviewer|vncserver|vnc)
+        $E "vncviewer addresa:port"
+    ;;
+
+    wacom)
+        $E "za lijeva dva gumba - Button 3 je gornji, 1 - donji"
+        $E 'xsetwacom --set "Wacom Intuos S 2 Pad pad" Button 3 key "Left"'
+        $E 'xsetwacom --set "Wacom Intuos S 2 Pad pad" Button 1 key "Right"'
+    ;;
+
+    wget)
+        $E "wget -UMozilla --no-parent --recursive --level 0 ..."
+        $E "wget -UMozilla -r -A .jpg"
+    ;;
+
+    xcalib)
+        $E "Gama korekcija, kontrast etc su sve relativne postavke"
+        $E "npr -co 90, svaki puta smanjuje kontrast za 10%."
+        $E "-a je za trenutnu promjenu, bez -a trebas icc profil."
+        $E "xcalib -a -i     # invert"
+        $E "xcalib -a -c     # izbrisi sve postavke"
+        $E "xcalib -a -co 90 # smanji kontrast za 10%"
+        $E "xcalib -a -co 10 # smanji kontrast za 90%"
+        $E "xcalib -a -gc 0.9 # gamma, 10% posvijetli"
+        $E "xcalib -a -gc 1.1 # gamma, 10% potamni"
+        $E "# RGB - recimo za navecer:"
+        $E "xcalib -a -red 1 9 100 -green 1 9 80 -blue 1 9 50"
+    ;;
+
+    Xephyr)
+        $E "Xephyr -br -ac -noreset -screen 1366x768 :1"
+    ;;
+
+    xrandr) 
+        $E "Npr za virtualno 1.3x veci ekran od postojeceg:"
+        $E "xrandr --output LVDS1 --scale 1.3x1.3"
+        $E "restartaj ratpoison"
+    ;;
+
+    xsetwacom) 
+        $E "xsetwacom --get \"Wacom Intuos S 2 Pen stylus\" all"
+        $E "xsetwacom --set \"Wacom Intuos S 2 Pen stylus\" Area 0 0 15200 9500"
+    ;;    
+
+    *)
+        cat $0 | sed '/   [a-zA-Z|-]*)$/!d' | sort | \
+                 sed -z 's/)\n//g; s/^   /[/; s/   / |/g;s/$/ ]\n/'
+    ;;
+
+esac
+
+
